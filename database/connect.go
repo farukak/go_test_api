@@ -31,7 +31,7 @@ func Connect() error {
 	db := client.Database(dbName)
 
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	mg = models.MongoInstance{
@@ -44,12 +44,12 @@ func Connect() error {
 	err = client.Ping(ctx, readpref.Primary())
 
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	databases, err := client.ListDatabaseNames(ctx, bson.M{})
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	fmt.Println(databases)
